@@ -62,5 +62,23 @@ public class Autore {
         this.nazionalita = nazionalita;
     }
 
+    public List<Libro> getLibri() {
+        return libri;
+    }
+
+    public void setLibri(List<Libro> libri) {
+        this.libri = libri;
+    }
+    
+
+    @Override
+    public String toString() {
+        return "Autore [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", nazionalita=" + nazionalita
+                + ", libri=" + libri + "]";
+    }
+
+    
+    
+
 
 }

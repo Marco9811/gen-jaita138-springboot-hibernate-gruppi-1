@@ -39,6 +39,21 @@ public class Genere {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
+
+
+    public List<Libro> getLibri() {
+        return libri;
+    }
+
+    public void setLibri(List<Libro> libri) {
+        this.libri = libri;
+    }
+
+    @Override
+    public String toString() {
+        return "Genere [id=" + id + ", nome=" + nome + ", libri=" + libri + "]";
+    }
 
     
 

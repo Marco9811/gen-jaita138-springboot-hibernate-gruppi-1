@@ -30,13 +30,13 @@ public class Libro {
 	@Column(length = 50) // Definisce la colonna nel database 
 	private String ISBN;
 
-	 @ManyToOne
-	 @JoinTable(
+	@ManyToOne
+	@JoinTable(
 		name="libro_genere",
 		joinColumns = @JoinColumn(name="libro_id"),
 		inverseJoinColumns = @JoinColumn(name="genere_id")
-	 )
-	 private List<Genere> generi;
+	)
+	private List<Genere> generi;
 
 	// Costruttore vuoto (obbligatorio per JPA) 
 	// public Libro() { 
@@ -79,6 +79,21 @@ public class Libro {
 	public void setISBN(String iSBN) {
 		ISBN = iSBN;
 	}
+
+	public List<Genere> getGeneri() {
+		return generi;
+	}
+
+	public void setGeneri(List<Genere> generi) {
+		this.generi = generi;
+	}
+
+	@Override
+	public String toString() {
+		return "Libro [id=" + id + ", titolo=" + titolo + ", dataPubblicazione=" + dataPubblicazione + ", ISBN=" + ISBN
+				+ ", generi=" + generi + "]";
+	}
+	
 
 	
 
