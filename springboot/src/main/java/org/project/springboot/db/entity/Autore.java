@@ -1,10 +1,13 @@
 package org.project.springboot.db.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity // Indica che questa classe è un'entità JPA
 
@@ -23,6 +26,9 @@ public class Autore {
 
 	@Column(length = 50) // Definisce la colonna nel database 
 	private String nazionalita;
+
+    @OneToMany(mappedBy = "autore")
+    private List<Libro> libri;
 
     public Long getId() {
         return id;

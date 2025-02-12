@@ -1,11 +1,16 @@
 package org.project.springboot.db.entity;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
 
 @Entity // Indica che questa classe è un'entità JPA
 
@@ -24,6 +29,14 @@ public class Libro {
 
 	@Column(length = 50) // Definisce la colonna nel database 
 	private String ISBN;
+
+	 @ManyToOne
+	 @JoinTable(
+		name="libro_genere",
+		joinColumns = @JoinColumn(name="libro_id"),
+		inverseJoinColumns = @JoinColumn(name="genere_id")
+	 )
+	 private List<Genere> generi;
 
 	// Costruttore vuoto (obbligatorio per JPA) 
 	// public Libro() { 
