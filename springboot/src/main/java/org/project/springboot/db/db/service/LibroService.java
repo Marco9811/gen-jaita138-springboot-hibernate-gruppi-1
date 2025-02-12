@@ -32,8 +32,20 @@ public class LibroService {
         List<Libro> libri = libroRepo.findAll();
         for (Libro libro : libri) {
             Hibernate.initialize(libro.getAutore());
+            Hibernate.initialize(libro.getGeneri());
         }
                 return libri;
+    }
+    public List<Libro> findByTitoloStartingWithP() {
+        return libroRepo.findByTitoloStartingWithIgnoreCase("P");
+    }
+
+    public List<Libro> findByAnnoBetween(){
+        return libroRepo.findByAnnoBetween(2000,2020);
+    }
+
+    public List <Libro> findByISBN(){
+    return libroRepo.findByISBNIgnoreCase("978-3-16-148410-0");
     }
 
 }

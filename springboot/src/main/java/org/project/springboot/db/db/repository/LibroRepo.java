@@ -8,4 +8,10 @@ import java.util.List;
 
 @Repository
 public interface LibroRepo extends JpaRepository<Libro, Long>{
+
+    List<Libro> findByTitoloStartingWithIgnoreCase(String string);
+
+    List<Libro> findByAnnoBetween(int i, int j);
+
+    List<Libro> findByISBNIgnoreCase(String string);
 }
