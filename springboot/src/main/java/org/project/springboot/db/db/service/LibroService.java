@@ -26,4 +26,14 @@ public class LibroService {
         }
         return libri;
     }
+
+    @Transactional
+    public List<Libro> findAllWithAutoreWithGenere(){
+        List<Libro> libri = libroRepo.findAll();
+        for (Libro libro : libri) {
+            Hibernate.initialize(libro.getAutore());
+        }
+                return libri;
+    }
+
 }
