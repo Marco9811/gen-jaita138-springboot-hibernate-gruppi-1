@@ -7,23 +7,25 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity // Indica che questa classe è un'entità JPA
 
 public class Genere {
-	@Id // Indica la chiave primaria
-	
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremento dell'id
-	
-	private Long id;
+    @Id // Indica la chiave primaria
 
-	@Column(length = 50) // Definisce la colonna nel database 
-	private String nome;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremento dell'id
 
-    @OneToMany(mappedBy = "generi")
+    private Long id;
+
+    @Column(length = 50) // Definisce la colonna nel database
+    private String nome;
+
+    @ManyToMany
     private List<Libro> libri;
 
+    
     public Long getId() {
         return id;
     }
@@ -39,22 +41,17 @@ public class Genere {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
 
+    // public List<Libro> getLibri() {
+    //     return libri;
+    // }
 
-    public List<Libro> getLibri() {
-        return libri;
-    }
-
-    public void setLibri(List<Libro> libri) {
-        this.libri = libri;
-    }
+    // public void setLibri(List<Libro> libri) {
+    //     this.libri = libri;
+    // }
 
     @Override
     public String toString() {
-        return "Genere [id=" + id + ", nome=" + nome + ", libri=" + libri + "]";
+        return "Genere [id=" + id + ", nome=" + nome + ", libri=" + "]";
     }
-
-    
-
 }
