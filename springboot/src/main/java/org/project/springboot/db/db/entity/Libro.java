@@ -1,4 +1,4 @@
-package org.project.springboot.db.entity;
+package org.project.springboot.db.db.entity;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -83,6 +83,14 @@ public class Libro {
 	public String toString() {
 		return "Libro [id=" + id + ", titolo=" + titolo + ", dataPubblicazione=" + dataPubblicazione + ", ISBN=" + ISBN
 				+ ", generi=" + "]";
+	}
+
+	public Autore getAutore() {
+		return autore;
+	}
+
+	public void setAutore(Autore autore) {
+		this.autore = autore;
 	}
 
 }

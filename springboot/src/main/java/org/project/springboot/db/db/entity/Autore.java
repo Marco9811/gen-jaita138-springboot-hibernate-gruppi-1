@@ -1,4 +1,4 @@
-package org.project.springboot.db.entity;
+package org.project.springboot.db.db.entity;
 
 import java.util.List;
 
