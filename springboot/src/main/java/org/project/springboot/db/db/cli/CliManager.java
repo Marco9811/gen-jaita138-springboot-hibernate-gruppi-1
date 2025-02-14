@@ -28,11 +28,11 @@ public class CliManager {
     private void printOptions() {
 
         System.out.println("Operazioni:");
-        System.out.println("1. Visualizza tutte le auto");
-        System.out.println("2. Inserisci nuova auto");
-        System.out.println("3. Modifica un auto esistente");
-        System.out.println("4. Elimina un auto esistente");
-        System.out.println("5. Stampa dettagli auto");
+        System.out.println("1. Visualizza tutti i libri");
+        System.out.println("2. Visualizza tutti i libri con autore");
+        System.out.println("3. Visualizza tutti i libri con autore e generi");
+        System.out.println("4. Visualizza tutti gli autori");
+        System.out.println("5. Visualizza tutti i generi");
         System.out.println("6. Esci");
         System.out.println("");
 
@@ -42,7 +42,7 @@ public class CliManager {
         switch (strValue) {
 
             case 1:
-                readAll();
+                
                 
                 break;
 
