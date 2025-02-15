@@ -38,7 +38,8 @@ public class CliManager {
         System.out.println("4. Inserisci un nuovo genere");
         System.out.println("5. Visualizza tutti gli autori");
         System.out.println("6. Inserisci un nuovo autore");
-        System.out.println("7. Esci");
+        System.out.println("7. Elimina genere");
+        System.out.println("8. Esci");
         System.out.println("Inserisci il valore che vuoi");
 
         int strValue = sc.nextInt();
@@ -63,7 +64,12 @@ public class CliManager {
             case 6:
                 addAutore();
                 break;
+
             case 7:
+                 deleteGenere();
+                 break;
+
+            case 8:
                 System.out.println("Arrivederci");
                 return;
             default:
@@ -236,6 +242,25 @@ public class CliManager {
         g.setNome(nome);
 
         genereService.save(g);
+    }
+
+    private void deleteGenere() {
+        System.out.println("Quale genere vuoi eliminare?");
+        List<Genere> generi = genereService.findAll();
+        for (int i = 0; i < generi.size(); i++) {
+            System.out.println(generi.get(i).getId() + ". " + generi.get(i).getNome());
+        }
+        System.out.println("Inserisci il numero:");
+        long scelta = sc.nextLong();
+        sc.nextLine();
+        Genere g = genereService.findById(scelta);
+        if (g!=null) {
+            genereService.delete(g);
+            System.out.println("Genere eliminato con successo");            
+        }
+        else {System.out.println("Genere non trovato");}
+
+
     }
 
 }

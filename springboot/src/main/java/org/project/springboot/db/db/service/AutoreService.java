@@ -20,4 +20,9 @@ public class AutoreService {
         autoreRepo.save(autore);
     }
 
+    public void delete(Autore autore){
+        autoreRepo.delete(autore);
+    }
+    
+
 }

@@ -49,4 +49,8 @@ public class LibroService {
         return libroRepo.findByISBNIgnoreCase("978-3-16-148410-0");
     }
 
+    public void delete(Libro libro){
+        libroRepo.delete(libro);
+    }
+
 }
