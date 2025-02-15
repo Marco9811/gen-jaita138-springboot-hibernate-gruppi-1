@@ -8,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 
 @Entity // Indica che questa classe è un'entità JPA
 
@@ -42,13 +41,6 @@ public class Genere {
         this.nome = nome;
     }
 
-    // public List<Libro> getLibri() {
-    //     return libri;
-    // }
-
-    // public void setLibri(List<Libro> libri) {
-    //     this.libri = libri;
-    // }
 
     @Override
     public String toString() {

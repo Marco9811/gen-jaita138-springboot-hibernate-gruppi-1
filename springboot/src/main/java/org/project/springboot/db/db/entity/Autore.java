@@ -30,6 +30,7 @@ public class Autore {
     @OneToMany(mappedBy = "autore")
     private List<Libro> libri;
 
+
     public Long getId() {
         return id;
     }

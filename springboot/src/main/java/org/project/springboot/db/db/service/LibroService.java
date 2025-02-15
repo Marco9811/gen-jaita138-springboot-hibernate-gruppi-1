@@ -1,6 +1,5 @@
 package org.project.springboot.db.db.service;
 import java.util.List;
-
 import org.hibernate.Hibernate;
 import org.project.springboot.db.db.entity.Libro;
 import org.project.springboot.db.db.repository.LibroRepo;
@@ -12,7 +11,11 @@ import jakarta.transaction.Transactional;
 @Service
 public class LibroService {
     @Autowired
-    private LibroRepo libroRepo;
+    public LibroRepo libroRepo;
+
+     public void save(Libro libro){
+        libroRepo.save(libro);
+    }
 
     public List <Libro> findAll(){
         return libroRepo.findAll();
@@ -40,9 +43,7 @@ public class LibroService {
         return libroRepo.findByTitoloStartingWithIgnoreCase("P");
     }
 
-    public List<Libro> findByAnnoBetween(){
-        return libroRepo.findByAnnoBetween(2000,2020);
-    }
+
 
     public List <Libro> findByISBN(){
     return libroRepo.findByISBNIgnoreCase("978-3-16-148410-0");

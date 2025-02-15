@@ -4,7 +4,9 @@ import java.util.List;
 import org.project.springboot.db.db.entity.Autore;
 import org.project.springboot.db.db.repository.AutoreRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AutoreService {
 
     @Autowired
@@ -14,4 +16,7 @@ public class AutoreService {
         return autoreRepo.findAll();
     }
 
+    public void save(Autore autore){
+        autoreRepo.save(autore);
+    }
 }
