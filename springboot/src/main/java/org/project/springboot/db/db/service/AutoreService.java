@@ -23,6 +23,10 @@ public class AutoreService {
     public void delete(Autore autore){
         autoreRepo.delete(autore);
     }
+
+    public Autore findById(Long id) {
+      return autoreRepo.findById(id).orElse(null);
+    }
     
 
 }

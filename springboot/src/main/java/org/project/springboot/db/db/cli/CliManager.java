@@ -39,7 +39,9 @@ public class CliManager {
         System.out.println("5. Visualizza tutti gli autori");
         System.out.println("6. Inserisci un nuovo autore");
         System.out.println("7. Elimina genere");
-        System.out.println("8. Esci");
+        System.out.println("8. Elimina autore");
+        System.out.println("9. Elimina libro");
+        System.out.println("10. Esci");
         System.out.println("Inserisci il valore che vuoi");
 
         int strValue = sc.nextInt();
@@ -70,6 +72,14 @@ public class CliManager {
                  break;
 
             case 8:
+                deleteAutore();
+                break;
+
+            case 9:
+                deleteLibro();
+                break;
+
+            case 10:
                 System.out.println("Arrivederci");
                 return;
             default:
@@ -259,6 +269,42 @@ public class CliManager {
             System.out.println("Genere eliminato con successo");            
         }
         else {System.out.println("Genere non trovato");}
+
+        
+    }
+
+    private void deleteAutore(){
+        List<Autore> autori = autoreService.findAll();
+        for (int i = 0; i < autori.size(); i++) {
+            System.out.println(autori.get(i).getId() + ". " + autori.get(i).getNome());
+        }
+        System.out.println("Inserisci il numero:");
+        long scelta = sc.nextLong();
+        sc.nextLine();
+        Autore a = autoreService.findById(scelta);
+        if (a!=null) {
+            autoreService.delete(a);
+            System.out.println("Autore eliminato con successo");            
+        }
+        else {System.out.println("Autore non trovato");}
+
+    }
+
+    private void deleteLibro(){
+        List<Libro> libri = libroService.findAll();
+        for (int i = 0; i < libri.size(); i++) {
+            System.out.println(libri.get(i).getId() + ". " + libri.get(i).getTitolo());
+        }
+        System.out.println("Inserisci il numero:");
+        long scelta = sc.nextLong();
+        sc.nextLine();
+        Libro l = libroService.findById(scelta);
+        if (l!=null) {
+            libroService.delete(l);
+            System.out.println("Libro eliminato con successo");            
+        }
+        else {System.out.println("Libro non trovato");}
+
 
 
     }

@@ -53,4 +53,8 @@ public class LibroService {
         libroRepo.delete(libro);
     }
 
+    public Libro findById(Long id) {
+      return libroRepo.findById(id).orElse(null);
+    }
+
 }
