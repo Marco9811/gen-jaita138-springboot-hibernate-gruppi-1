@@ -12,11 +12,12 @@ public class AutoreService {
     @Autowired
     private AutoreRepo autoreRepo;
 
-    public List<Autore> findAll(){
+    public List<Autore> findAll() {
         return autoreRepo.findAll();
     }
 
-    public void save(Autore autore){
+    public void save(Autore autore) {
         autoreRepo.save(autore);
     }
+
 }

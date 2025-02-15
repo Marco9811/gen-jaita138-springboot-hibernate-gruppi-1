@@ -13,11 +13,11 @@ public class GenereService {
     @Autowired
     private GenereRepo genereRepo;
 
-    public List<Genere> findAll(){
+    public List<Genere> findAll() {
         return genereRepo.findAll();
     }
 
-        public void save(Genere genere){
+    public void save(Genere genere) {
         genereRepo.save(genere);
     }
 

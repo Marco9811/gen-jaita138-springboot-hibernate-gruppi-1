@@ -9,27 +9,25 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-@Entity // Indica che questa classe è un'entità JPA
-
+@Entity
 public class Autore {
-	@Id // Indica la chiave primaria
-	
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremento dell'id
-	
-	private Long id;
+    @Id
 
-	@Column(length = 50) // Definisce la colonna nel database 
-	private String nome;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-	@Column(length = 50) // Definisce la colonna nel database 
-	private String cognome;
+    private Long id;
 
-	@Column(length = 50) // Definisce la colonna nel database 
-	private String nazionalita;
+    @Column(length = 50)
+    private String nome;
+
+    @Column(length = 50)
+    private String cognome;
+
+    @Column(length = 50)
+    private String nazionalita;
 
     @OneToMany(mappedBy = "autore")
     private List<Libro> libri;
-
 
     public Long getId() {
         return id;
@@ -63,23 +61,9 @@ public class Autore {
         this.nazionalita = nazionalita;
     }
 
-    // public List<Libro> getLibri() {
-    //     return libri;
-    // }
-
-    // public void setLibri(List<Libro> libri) {
-    //     this.libri = libri;
-    // }
-    
-
     @Override
     public String toString() {
         return "Autore [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", nazionalita=" + nazionalita
-                + ", libri="  + "]";
+                + ", libri=" + "]";
     }
-
-    
-    
-
-
 }

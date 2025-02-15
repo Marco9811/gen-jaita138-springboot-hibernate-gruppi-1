@@ -14,9 +14,9 @@ public class SpringbootApplication implements CommandLineRunner {
 	@Autowired
 	public LibroService libroService;
 	@Autowired
-    public GenereService genereService;
+	public GenereService genereService;
 	@Autowired
-    public AutoreService autoreService;
+	public AutoreService autoreService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootApplication.class, args);
@@ -25,7 +25,6 @@ public class SpringbootApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		new CliManager(libroService, genereService, autoreService);
-
 	}
 
 }

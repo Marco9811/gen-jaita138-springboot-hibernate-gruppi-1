@@ -13,22 +13,22 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
-@Entity // Indica che questa classe è un'entità JPA
+@Entity
 
 public class Libro {
-	@Id // Indica la chiave primaria
+	@Id
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremento dell'id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	private Long id;
 
-	@Column(length = 50) // Definisce la colonna nel database
+	@Column(length = 50)
 	private String titolo;
 
-	@Column(length = 50) // Definisce la colonna nel database
+	@Column(length = 50)
 	private LocalDate dataPubblicazione;
 
-	@Column(length = 50) // Definisce la colonna nel database
+	@Column(length = 50)
 	private String ISBN;
 
 	@ManyToOne
@@ -72,12 +72,12 @@ public class Libro {
 	}
 
 	public List<Genere> getGeneri() {
-        return generi;
-    }
+		return generi;
+	}
 
-    public void setGeneri(List<Genere> generi) {
-        this.generi = generi;
-    }
+	public void setGeneri(List<Genere> generi) {
+		this.generi = generi;
+	}
 
 	@Override
 	public String toString() {

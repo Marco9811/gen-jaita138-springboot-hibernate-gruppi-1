@@ -9,22 +9,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
-@Entity // Indica che questa classe è un'entità JPA
+@Entity
 
 public class Genere {
-    @Id // Indica la chiave primaria
+    @Id
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremento dell'id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
 
-    @Column(length = 50) // Definisce la colonna nel database
+    @Column(length = 50)
     private String nome;
 
     @ManyToMany
     private List<Libro> libri;
 
-    
     public Long getId() {
         return id;
     }
@@ -40,7 +39,6 @@ public class Genere {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
 
     @Override
     public String toString() {

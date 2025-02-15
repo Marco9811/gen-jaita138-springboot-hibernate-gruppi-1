@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.project.springboot.db.db.entity.Autore;
 import org.project.springboot.db.db.entity.Genere;
 import org.project.springboot.db.db.entity.Libro;
@@ -74,6 +73,7 @@ public class CliManager {
 
     }
 
+    // Funzione libri
     public void libriReadAll() {
         List<Libro> libri = libroService.findAll();
 
@@ -126,7 +126,7 @@ public class CliManager {
         }
         System.out.println("Inserisci il numero corrispondente:");
         int autoreIndex = sc.nextInt();
-        sc.nextLine(); 
+        sc.nextLine();
 
         if (autoreIndex < 1 || autoreIndex > autori.size()) {
             System.out.println("Scelta non valida.");
@@ -169,11 +169,11 @@ public class CliManager {
         }
         libro.setGeneri(generiSelezionati);
 
-
         libroService.save(libro);
         System.out.println("Libro aggiunto con successo!");
     }
 
+    // Funzioni autore
     public void autoreReadAll() {
         List<Autore> autori = autoreService.findAll();
 
@@ -210,6 +210,7 @@ public class CliManager {
         autoreService.save(a);
     }
 
+    // Funzioni Genere
     public void genereReadAll() {
         List<Genere> generi = genereService.findAll();
 
