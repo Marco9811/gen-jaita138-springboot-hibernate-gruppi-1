@@ -68,8 +68,8 @@ public class CliManager {
                 break;
 
             case 7:
-                 deleteGenere();
-                 break;
+                deleteGenere();
+                break;
 
             case 8:
                 deleteAutore();
@@ -133,60 +133,113 @@ public class CliManager {
         List<Autore> autori = autoreService.findAll();
         if (autori.isEmpty()) {
             System.out.println("Nessun autore disponibile. Aggiungi un autore prima di inserire un libro.");
-            return;
-        }
+            libro.setAutore(addAutore());
+        } else {
+            System.out.println("Seleziona un autore o crea nuovo autore:");
+            for (int i = 0; i < autori.size(); i++) {
+                System.out.println((i + 1) + ". " + autori.get(i).getNome() + " " + autori.get(i).getCognome());
+            }
+            System.out.println((autori.size() + 1) + ". Crea nuovo autore: ");
+            System.out.println("Inserisci il numero corrispondente:");
+            int autoreIndex = sc.nextInt();
+            sc.nextLine();
 
-        System.out.println("Seleziona un autore:");
-        for (int i = 0; i < autori.size(); i++) {
-            System.out.println((i + 1) + ". " + autori.get(i).getNome() + " " + autori.get(i).getCognome());
-        }
-        System.out.println("Inserisci il numero corrispondente:");
-        int autoreIndex = sc.nextInt();
-        sc.nextLine();
-
-        if (autoreIndex < 1 || autoreIndex > autori.size()) {
-            System.out.println("Scelta non valida.");
-            return;
-        }
-        libro.setAutore(autori.get(autoreIndex - 1));
-
-        // Selezione generi
-        List<Genere> generi = genereService.findAll();
-        if (generi.isEmpty()) {
-            System.out.println("Nessun genere disponibile. Aggiungi un genere prima di inserire un libro.");
-            return;
-        }
-
-        System.out.println("Seleziona i generi (separati da virgola):");
-        for (int i = 0; i < generi.size(); i++) {
-            System.out.println((i + 1) + ". " + generi.get(i).getNome());
-        }
-        System.out.println("Inserisci i numeri corrispondenti separati da virgola:");
-        String generiInput = sc.nextLine();
-        String[] generiScelti = generiInput.split(",");
-
-        List<Genere> generiSelezionati = new ArrayList<>();
-        for (String g : generiScelti) {
-            try {
-                int index = Integer.parseInt(g.trim());
-                if (index >= 1 && index <= generi.size()) {
-                    generiSelezionati.add(generi.get(index - 1));
-                } else {
-                    System.out.println("Numero " + index + " non valido.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Formato non valido: " + g);
+            if (autoreIndex < 1 || autoreIndex > autori.size() + 1) {
+                System.out.println("Scelta non valida.");
+                return;
+            } else if (autoreIndex == autori.size() + 1) {
+                libro.setAutore(addAutore());
+            } else {
+                libro.setAutore(autori.get(autoreIndex - 1));
             }
         }
 
-        if (generiSelezionati.isEmpty()) {
-            System.out.println("Nessun genere selezionato. Aggiungi almeno un genere.");
-            return;
+        // System.out.println("Seleziona un autore:");
+        // for (int i = 0; i < autori.size(); i++) {
+        // System.out.println((i + 1) + ". " + autori.get(i).getNome() + " " +
+        // autori.get(i).getCognome());
+        // }
+        // System.out.println("Inserisci il numero corrispondente:");
+        // int autoreIndex = sc.nextInt();
+        // sc.nextLine();
+
+        // if (autoreIndex < 1 || autoreIndex > autori.size()) {
+        // System.out.println("Scelta non valida.");
+        // return;
+        // }
+        // libro.setAutore(autori.get(autoreIndex - 1));
+
+        // Selezione generi
+        List<Genere> generi = genereService.findAll();
+        List<Genere> generiSelezionati = new ArrayList<>();
+        boolean continua = true;
+        if (generi.isEmpty()) {
+            System.out.println("Nessun genere disponibile. Aggiungi un genere prima di inserire un libro.");
+            while (continua) {
+                generiSelezionati.add(addGenere());
+                System.out.println("vuoi aggiungere un'altro genere?: S/N");
+                String scelta = sc.nextLine();
+                if (scelta.equalsIgnoreCase("N")) {
+                    libro.setGeneri(generiSelezionati);
+                    continua = false;
+                }
+            }
+        }
+
+    
+        while (continua) {
+            genereReadAll();
+            System.out.println("Il genere è presente nella lista? S/N");
+            String scelta = sc.nextLine();
+
+            if (scelta.equalsIgnoreCase("S")) {
+                System.out.print("Inserisci il genere da ID: ");
+                Genere genere = genereService.findById(sc.nextLong());
+                sc.nextLine();
+                generiSelezionati.add(genere);
+            } else {
+                generiSelezionati.add(addGenere());
+            }
+            System.out.println("Vuoi inserire un altro genere? S/N");
+            String nuovaScelta = sc.nextLine();
+            if (nuovaScelta.equalsIgnoreCase("n")) {
+                continua = false;
+            }
         }
         libro.setGeneri(generiSelezionati);
-
         libroService.save(libro);
         System.out.println("Libro aggiunto con successo!");
+
+        // System.out.println("Seleziona i generi (separati da virgola) o crea nuovo genere: ");
+        // for (int i = 0; i < generi.size(); i++) {
+        //     System.out.println((i + 1) + ". " + generi.get(i).getNome());
+        // }
+        // System.out.println("Inserisci i numeri corrispondenti separati da virgola:");
+        // String generiInput = sc.nextLine();
+        // String[] generiScelti = generiInput.split(",");
+
+        // // List<Genere> generiSelezionati = new ArrayList<>();
+        // for (String g : generiScelti) {
+        //     try {
+        //         int index = Integer.parseInt(g.trim());
+        //         if (index >= 1 && index <= generi.size()) {
+        //             generiSelezionati.add(generi.get(index - 1));
+        //         } else {
+        //             System.out.println("Numero " + index + " non valido.");
+        //         }
+        //     } catch (NumberFormatException e) {
+        //         System.out.println("Formato non valido: " + g);
+        //     }
+        // }
+
+        // if (generiSelezionati.isEmpty()) {
+        //     System.out.println("Nessun genere selezionato. Aggiungi almeno un genere.");
+        //     return;
+        // }
+        // libro.setGeneri(generiSelezionati);
+
+        // libroService.save(libro);
+        // System.out.println("Libro aggiunto con successo!");
     }
 
     // Funzioni autore
@@ -208,7 +261,7 @@ public class CliManager {
         }
     }
 
-    private void addAutore() {
+    private Autore addAutore() {
         Autore a = new Autore();
 
         System.out.println("Inserisci il nome");
@@ -224,6 +277,7 @@ public class CliManager {
         a.setNazionalita(nazionalita);
 
         autoreService.save(a);
+        return a;
     }
 
     // Funzioni Genere
@@ -244,7 +298,7 @@ public class CliManager {
         }
     }
 
-    private void addGenere() {
+    private Genere addGenere() {
         Genere g = new Genere();
 
         System.out.println("Inserisci il nome del genere");
@@ -252,6 +306,7 @@ public class CliManager {
         g.setNome(nome);
 
         genereService.save(g);
+        return g;
     }
 
     private void deleteGenere() {
@@ -264,16 +319,16 @@ public class CliManager {
         long scelta = sc.nextLong();
         sc.nextLine();
         Genere g = genereService.findById(scelta);
-        if (g!=null) {
+        if (g != null) {
             genereService.delete(g);
-            System.out.println("Genere eliminato con successo");            
+            System.out.println("Genere eliminato con successo");
+        } else {
+            System.out.println("Genere non trovato");
         }
-        else {System.out.println("Genere non trovato");}
 
-        
     }
 
-    private void deleteAutore(){
+    private void deleteAutore() {
         List<Autore> autori = autoreService.findAll();
         for (int i = 0; i < autori.size(); i++) {
             System.out.println(autori.get(i).getId() + ". " + autori.get(i).getNome());
@@ -282,15 +337,16 @@ public class CliManager {
         long scelta = sc.nextLong();
         sc.nextLine();
         Autore a = autoreService.findById(scelta);
-        if (a!=null) {
+        if (a != null) {
             autoreService.delete(a);
-            System.out.println("Autore eliminato con successo");            
+            System.out.println("Autore eliminato con successo");
+        } else {
+            System.out.println("Autore non trovato");
         }
-        else {System.out.println("Autore non trovato");}
 
     }
 
-    private void deleteLibro(){
+    private void deleteLibro() {
         List<Libro> libri = libroService.findAll();
         for (int i = 0; i < libri.size(); i++) {
             System.out.println(libri.get(i).getId() + ". " + libri.get(i).getTitolo());
@@ -299,13 +355,12 @@ public class CliManager {
         long scelta = sc.nextLong();
         sc.nextLine();
         Libro l = libroService.findById(scelta);
-        if (l!=null) {
+        if (l != null) {
             libroService.delete(l);
-            System.out.println("Libro eliminato con successo");            
+            System.out.println("Libro eliminato con successo");
+        } else {
+            System.out.println("Libro non trovato");
         }
-        else {System.out.println("Libro non trovato");}
-
-
 
     }
 

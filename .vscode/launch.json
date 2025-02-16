@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SpringbootApplication",
+            "request": "launch",
+            "mainClass": "org.project.springboot.SpringbootApplication",
+            "projectName": "esercitazione"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-SpringbootApplication<springboot>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
